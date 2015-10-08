@@ -1,4 +1,4 @@
-# Docker Version Manager
+# Docker Version Manager (dvm)
 
 Dead simple version manager using symbolic links for various installed Docker
 client binaries.  This has **nothing** to do with versioning of Docker
