@@ -4,6 +4,9 @@ set -e
 
 function printUsage() {
   echo "$0: CMD PROGRAM [VERSION]"
+  echo ""
+  echo "Commands:"
+  echo "    use        Set active version"
 }
 
 function main() {
@@ -19,6 +22,25 @@ function main() {
   fi
 
   case "${CMD}" in
+    # Set active version
+    use)
+      # @TODO check ${VERSION}
+
+      # Prevent removing binary file
+      if ! [ -L "${BIN_DIR}/${PROGRAM}" ]; then
+        echo "${BIN_DIR}/${PROGRAM} should be a symlink"
+        exit 1
+      fi
+
+      # Remove existing symbolic link
+      if [ -L "${BIN_DIR}/${PROGRAM}" ]; then
+        sudo rm -v "${BIN_DIR}/${PROGRAM}"
+      fi
+
+      sudo ln -vs "${BIN_DIR}/${PROGRAM}-${VERSION}" "${BIN_DIR}/${PROGRAM}"
+
+      exit 0
+      ;;
     *)
       printUsage $0
       exit 1
