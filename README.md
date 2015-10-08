@@ -1,8 +1,8 @@
 # Docker Version Manager (dvm)
 
-Dead simple version manager using symbolic links for various installed Docker
-client binaries.  This has **nothing** to do with versioning of Docker
-Containers or Docker Images just the binaries such as `docker`, `docker-machine`
+Dead simple version manager for installed Docker client binaries using symbolic
+links.  This has **nothing** to do with versioning of Docker Containers or
+Docker Images just the binaries such as `docker`, `docker-machine`
 `docker-swarm` etc.
 
 ## Install
