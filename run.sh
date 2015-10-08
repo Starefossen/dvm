@@ -6,6 +6,7 @@ function printUsage() {
   echo "$0: CMD PROGRAM [VERSION]"
   echo ""
   echo "Commands:"
+  echo "    list       List installed versions"
   echo "    use        Set active version"
 }
 
@@ -22,6 +23,21 @@ function main() {
   fi
 
   case "${CMD}" in
+    # List installed versions
+    list)
+      local -r link=$(readlink "${BIN_DIR}/${PROGRAM}")
+
+      for version in "${BIN_DIR}/${PROGRAM}-"?.*.*; do
+        if [ "${version}" == "${link}" ]; then
+          echo "$(basename ${version}) *"
+        else
+          echo "$(basename ${version})"
+        fi
+      done
+
+      exit 0
+      ;;
+
     # Set active version
     use)
       # @TODO check ${VERSION}
