@@ -7,6 +7,8 @@ Docker Images just the binaries such as `docker`, `docker-machine`
 
 ## Install
 
+Install a new version for a given Docker binary.
+
 ```
 $ dvm install docker 1.9.0-dev
 > /usr/local/bin/docker -> /usr/local/bin/docker-1.9.0-dev
@@ -14,12 +16,16 @@ $ dvm install docker 1.9.0-dev
 
 ## Use
 
+Set active version for a given Docker binary.
+
 ```
 $ dvm use docker-machine 1.4.0
 > /usr/local/bin/docker-machine -> /usr/local/bin/docker-machine-0.4.1
 ```
 
 ## List
+
+List installed versions for a given Docker binary.
 
 ```
 $ dvm list docker
