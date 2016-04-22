@@ -37,7 +37,8 @@ function main() {
       local -r REPO=$(echo ${PROGRAM} | sed 's/docker-//g')
 
       if [ "${PROGRAM}" == "docker" ]; then
-        local -r URL="https://get.docker.com/builds/Darwin/x86_64/docker-${VERSION}"
+        local -r URL="https://get.docker.com/builds/Darwin/x86_64/docker-${VERSION}.tgz"
+        curl -L "${URL}" | tar xOz --strip-components=1 > "${PROGRAM}-${VERSION}"
       else
         if [ "${PROGRAM}" == "docker-machine" ]; then
           local -r URL="https://github.com/docker/${REPO}/releases/download/v${VERSION}/${PROGRAM}-Darwin-x86_64"
@@ -47,9 +48,10 @@ function main() {
           echo "Install of ${PROGRAM} is not supported!"
           exit 1
         fi
+
+        curl -L -o "${PROGRAM}-${VERSION}" "${URL}"
       fi
 
-      curl -L -o "${PROGRAM}-${VERSION}" "${URL}"
       chmod +x "${PROGRAM}-${VERSION}"
 
       sudo rm -v "${BIN_DIR}/${PROGRAM}"
