@@ -52,10 +52,10 @@ function main() {
         curl -vL -o "${PROGRAM}-${VERSION}" "${URL}"
       fi
 
-      chmod +x "${PROGRAM}-${VERSION}"
+      chmod -v +x "${PROGRAM}-${VERSION}"
 
       sudo rm -v "${BIN_DIR}/${PROGRAM}"
-      sudo mv "${PROGRAM}-${VERSION}" "${BIN_DIR}"
+      sudo mv -v "${PROGRAM}-${VERSION}" "${BIN_DIR}"
       sudo ln -vs "${BIN_DIR}/${PROGRAM}-${VERSION}" "${BIN_DIR}/${PROGRAM}"
       ;;
 
