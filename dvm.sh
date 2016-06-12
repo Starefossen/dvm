@@ -38,6 +38,7 @@ function main() {
 
       if [ "${PROGRAM}" == "docker" ]; then
         local -r URL="https://get.docker.com/builds/Darwin/x86_64/docker-${VERSION}.tgz"
+        echo ${URL}
         curl -vL "${URL}" | tar xOz --strip-components=1 > "${PROGRAM}-${VERSION}"
       else
         if [ "${PROGRAM}" == "docker-machine" ]; then
@@ -49,6 +50,7 @@ function main() {
           exit 1
         fi
 
+        echo ${URL}
         curl -vL -o "${PROGRAM}-${VERSION}" "${URL}"
       fi
 
