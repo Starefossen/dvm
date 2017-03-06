@@ -38,19 +38,23 @@ function main() {
 
       if [ "${PROGRAM}" == "docker" ]; then
         local -r URL="https://get.docker.com/builds/Darwin/x86_64/docker-${VERSION}.tgz"
-        echo ${URL}
-        curl -vL "${URL}" | tar xOz --strip-components=1 > "${PROGRAM}-${VERSION}"
+      elif [ "${PROGRAM}" == "docker-machine" ]; then
+        local -r URL="https://github.com/docker/${REPO}/releases/download/v${VERSION}/${PROGRAM}-Darwin-x86_64"
+      elif [ "${PROGRAM}" == "docker-compose" ]; then
+        local -r URL="https://github.com/docker/${REPO}/releases/download/${VERSION}/${PROGRAM}-Darwin-x86_64"
       else
-        if [ "${PROGRAM}" == "docker-machine" ]; then
-          local -r URL="https://github.com/docker/${REPO}/releases/download/v${VERSION}/${PROGRAM}-Darwin-x86_64"
-        elif [ "${PROGRAM}" == "docker-compose" ]; then
-          local -r URL="https://github.com/docker/${REPO}/releases/download/${VERSION}/${PROGRAM}-Darwin-x86_64"
-        else
-          echo "Install of ${PROGRAM} is not supported!"
-          exit 1
-        fi
+        echo "Install of ${PROGRAM} is not supported!"
+        exit 1
+      fi
 
-        echo ${URL}
+      echo ${URL}
+
+      if [ "${PROGRAM}" == "docker" ]; then
+        curl -vOL "${URL}"
+        tar vxf "docker-${VERSION}.tgz"
+        mv -v docker/docker "docker-${VERSION}"
+        rm -v -rf docker/ "docker-${VERSION}.tgz"
+      else
         curl -vL -o "${PROGRAM}-${VERSION}" "${URL}"
       fi
 
