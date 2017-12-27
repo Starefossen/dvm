@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
+set -u
 
 function printUsage() {
   echo "$0: CMD PROGRAM [VERSION]"
@@ -60,7 +61,7 @@ function main() {
 
       chmod -v +x "${PROGRAM}-${VERSION}"
 
-      sudo rm -v "${BIN_DIR}/${PROGRAM}"
+      sudo rm -v "${BIN_DIR}/${PROGRAM}" || true
       sudo mv -v "${PROGRAM}-${VERSION}" "${BIN_DIR}"
       sudo ln -vs "${BIN_DIR}/${PROGRAM}-${VERSION}" "${BIN_DIR}/${PROGRAM}"
       ;;
